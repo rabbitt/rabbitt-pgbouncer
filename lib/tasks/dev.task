@@ -1,0 +1,16 @@
+namespace :dev do
+  desc "setup local environment for development"
+  task :setup do
+    output = %x'bundle install'
+    if $?.exitstatus != 0
+      STDERR.puts "\`bundle install\` failed. Output was:"
+      STDERR.puts output
+    end
+
+    output = %x'githooks attach -p .githooks'
+    if $?.exitstatus != 0
+      STDERR.puts "Unable to attach githooks to this repository. Error was:"
+      STDERR.puts output if $?.exitstatus != 0
+    end
+  end
+end

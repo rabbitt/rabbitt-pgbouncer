@@ -1,0 +1,7 @@
+fixtures:
+  symlinks:
+    pgbouncer: "#{source_dir}"
+  forge_modules:
+    module_data: "ripienaar/module_data"
+    stdlib: "puppetlabs/stdlib"
+    concat: "puppetlabs/concat"

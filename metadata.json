@@ -1,0 +1,22 @@
+{
+  "name": "rabbitt-pgbouncer",
+  "version": "1.0.0",
+  "author": "Carl P. Corliss <rabbitt@gmail.com>",
+  "license": "GPLv3",
+  "summary": "Manages PGBouncer Service and Configuration",
+  "source": "https://github.com/rabbitt/rabbitt-pgbouncer.git",
+  "project_page": "https://github.com/rabbitt/rabbitt-pgbouncer",
+  "issues_url": "https://github.com/rabbitt/rabbitt-pgbouncer/issues",
+  "tags": ["postgresql", "pgbouncer" ],
+
+  "operatingsystem_support": [
+    {"operatingsystem": "RedHat", "operatingsystemrelease": ["7"] },
+    {"operatingsystem": "CentOS", "operatingsystemrelease": ["7"] }
+  ],
+
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 4.7.0"},
+    {"name":"ripienaar/module_data","version_requirement":">= 0.0.3"},
+    {"name": "puppetlabs-concat", "version_requirement": ">=1.1.1"}
+  ]
+}
