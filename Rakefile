@@ -4,7 +4,11 @@ Bundler.require(:rake)
 require 'puppet-syntax/tasks/puppet-syntax'
 require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet-lint/tasks/puppet-lint'
-require 'puppet_blacksmith/rake_tasks'
+
+begin
+  require 'puppet_blacksmith/rake_tasks'
+rescue LoadError
+end
 
 PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "pkg/**/*.pp"]
 
