@@ -2,7 +2,11 @@
   connect_string = @database_connect_options.reject do |_, value|
     value.to_s =~ /^(\s*|undef(ined)?)$/
   end.collect do |parameter, value|
-    "#{parameter}=#{value.include?(' ') ? value.inspect : value}"
+    if value.is_a?(String) && value.include?(' ')
+      "#{parameter}=#{value.inspect}"
+    else
+      "#{parameter}=#{value}"
+    end
   end.join(' ')
 -%>
 <%= @real_client_db %> = <%= connect_string %>
