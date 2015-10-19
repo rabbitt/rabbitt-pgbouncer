@@ -206,7 +206,7 @@ describe 'pgbouncer', :type => :class do
         ],
         'host'               => [
           { value: {'x' => 'x'}, match: /not a string/i },
-          { value: 0, match: /expected a value that looks like a hostname or ip/ },
+          { value: 0, match: /(0 is not a string|expected a value that looks like a hostname or ip)/ },
         ],
         'port'               => [
           { value: {'x' => 'x'}, match: /Expected first argument to be an Integer or Array/i },
