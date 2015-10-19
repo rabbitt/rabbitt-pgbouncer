@@ -7,11 +7,6 @@ fixture_path = Pathname.new(File.expand_path(File.join(__FILE__, '..', 'fixtures
 at_exit { RSpec::Puppet::Coverage.report! }
 
 RSpec.configure do |c|
-  # c.before(:each) do
-  #   Puppet::Util::Log.level = :warning
-  #   Puppet::Util::Log.newdestination(:console)
-  # end
-
   c.module_path  = fixture_path.join('modules').to_s
   c.manifest_dir = fixture_path.join('manifests').to_s
   c.hiera_config = fixture_path.dirname.join('hiera', 'hiera.yaml').to_s
