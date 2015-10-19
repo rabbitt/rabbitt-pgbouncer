@@ -15,6 +15,6 @@ end
 group :development do
   gem 'travis'
   gem 'travis-lint'
-  gem 'puppet-blacksmith', require: false
-  gem 'rabbitt-githooks', '~> 1.6.0', require: false
+  gem 'puppet-blacksmith', :require => false
+  gem 'rabbitt-githooks', '~> 1.6.0', :require => false
 end
