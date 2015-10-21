@@ -53,7 +53,7 @@
 #
 # * `listen_addr`
 # Specifies list of addresses, where to listen for TCP connections. You may also
-# use * meaning “listen on all addresses”. When not set, only Unix socket
+# use * meaning "listen on all addresses". When not set, only Unix socket
 # connections are allowed. Addresses can be specified numerically (IPv4/IPv6) or
 # by name.
 # Default: not set
@@ -78,7 +78,7 @@
 #
 # * `user`
 # If set, specifies the Unix user to change to after startup. Works only if
-# PgBouncer is started as root or if it’s already running as given user.
+# PgBouncer is started as root or if it's already running as given user.
 # Default: not set
 #
 # * `auth_file`
@@ -120,7 +120,7 @@
 #    console database allows any user to log in as admin.
 #
 # * `auth_query`
-# Query to load user’s password from db.
+# Query to load user's password from db.
 # Default: SELECT usename, passwd FROM pg_shadow WHERE usename=$1
 #
 # * `pool_mode`
@@ -267,7 +267,7 @@
 # Default: 60
 #
 # * `verbose`
-# Increase verbosity. Mirrors “-v” switch on command line. Using “-v -v” on
+# Increase verbosity. Mirrors "-v" switch on command line. Using "-v -v" on
 # command line is same as verbose=2 in config.
 # Default: 0
 #
@@ -342,7 +342,7 @@
 # Default: 600.0
 #
 # * `server_connect_timeout`
-# If connection and login won’t finish in this amount of time, the connection will
+# If connection and login won't finish in this amount of time, the connection will
 # be closed. [seconds]
 #
 # Default: 15.0
@@ -361,7 +361,7 @@
 # Default: 60.0
 #
 # * `autodb_idle_timeout`
-# [seconds] If the automatically created (via “*”) database pools have been unused
+# [seconds] If the automatically created (via "*") database pools have been unused
 # this many seconds, they are freed. The negative aspect of that is that their
 # statistics are also forgotten.
 #
@@ -382,7 +382,7 @@
 # Period to check if zone serial has changed. PgBouncer can collect dns zones from
 # hostnames (everything after first dot) and then periodically check if zone
 # serial changes. If it notices changes, all hostnames under that zone are looked
-# up again. If any host ip changes, it’s connections are invalidated. Works only
+# up again. If any host ip changes, it's connections are invalidated. Works only
 # with UDNS backend.
 # Default: 0.0 (disabled)
 #

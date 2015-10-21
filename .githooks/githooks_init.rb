@@ -2,17 +2,35 @@ require 'yaml'
 require 'githooks'
 
 GitHooks::Hook.register 'pre-commit' do
-  commands :ruby, :erb, :puppet
+  commands :ruby, :erb, :puppet, :file
 
   limit(:type).to :modified, :added, :untracked, :tracked
   limit(:path).to %r/\.(rb|erb|pp|ya?ml)$/i
+
+  section 'Validate Content' do
+    action 'ASCII Only Manifests' do
+      limit(:path).to %r|\.pp$|i
+
+      on_each_file do |file|
+        valid = true
+        IO.readlines(file.full_path).each_with_index do |line, n|
+          unless line.ascii_only?
+            $stderr.puts "#{file.path}: Non-ASCII characters found on the following lines" if valid
+            $stderr.puts "#{file.path}:#{n+1}: #{line}"
+            valid = false
+          end
+        end
+        valid
+      end
+    end
+  end
 
   section 'Validate Syntax' do
     action 'Puppet Manifest' do
       limit(:path).to %r|\.pp$|i
 
       on_all_files do |files|
-        puppet('parser', 'validate', files.collect(&:path)) do |result|
+        puppet('parser', 'validate', files.collect(&:full_path)) do |result|
           next false if result.output.size > 0
         end
       end
@@ -22,7 +40,7 @@ GitHooks::Hook.register 'pre-commit' do
       limit(:path).to %r|\.erb$|i
 
       on_each_file do |file|
-        erb *%W[-P -x -T '-' #{file.path} ], prefix_output: file.path, post_pipe: 'ruby -c'
+        erb *%W[-P -x -T '-' #{file.full_path} ], prefix_output: file.path, post_pipe: 'ruby -c'
       end
     end
 
@@ -30,7 +48,7 @@ GitHooks::Hook.register 'pre-commit' do
       limit(:path).to %r|\.rb$|i
 
       on_each_file do |file|
-        ruby '-c', file.path, prefix_output: file.path
+        ruby '-c', file.full_path, prefix_output: file.path
       end
     end
 
@@ -39,7 +57,7 @@ GitHooks::Hook.register 'pre-commit' do
 
       on_each_file do |file|
         begin
-          YAML.load(IO.read(file.path)).tap { puts "#{file.path}" }
+          YAML.load(IO.read(file.full_path)).tap { puts "#{file.path}" }
         rescue StandardError => e
           $stderr.puts "#{file.path}\n\t#{e.class.name}: #{e.message}"
           false
